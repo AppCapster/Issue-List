@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Assignment</string>
+    <string name="app_name">Turtlemint Task</string>
 
     <string name="error_title">Error</string>
     <string name="error_retrieving_data">An error occurred while retrieving data.</string>
