@@ -36,7 +36,7 @@ class LocalViewModel(private val localDataSource: LocalDataSource) : ViewModel()
         val data = MutableLiveData<Resource<Boolean, PersistanceError>>()
         viewModelScope.launch {
             try {
-                localDataSource.insertIssue(IssueEntity(firstName, lastName))
+//                localDataSource.insertIssue(IssueEntity(firstName, lastName))
                 data.postValue(Resource.success(true))
             } catch (e: Exception) {
                 data.postValue(Resource.error(PersistanceError.UNKNOWN, e.message))

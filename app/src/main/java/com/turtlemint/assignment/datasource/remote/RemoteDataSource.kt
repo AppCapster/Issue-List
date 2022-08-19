@@ -2,6 +2,7 @@ package com.turtlemint.assignment.datasource.remote
 
 import com.turtlemint.assignment.datasource.local.database.entity.IssueEntity
 import com.turtlemint.assignment.datasource.remote.model.RetrofitAndInterceptorModel
+import com.turtlemint.assignment.datasource.remote.response.IssueResponse
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -19,7 +20,7 @@ class RemoteDataSource {
     private val retrofitAuth: Retrofit =
         RetrofitFactory.getAuthRetrofit()
 
-    suspend fun getIssues(): Response<List<IssueEntity>> {
+    suspend fun getIssues(): Response<List<IssueResponse>> {
         return retrofitAuth.create(IssuesClient::class.java).getIssues()
     }
 
@@ -38,7 +39,7 @@ enum class ResourceError { UNKNOWN, UNAUTHENTICATED, NETWORK }
 interface IssuesClient {
 
     @GET("square/okhttp/issues")
-    suspend fun getIssues(): Response<List<IssueEntity>>
+    suspend fun getIssues(): Response<List<IssueResponse>>
 }
 
 interface DownloadClient {
