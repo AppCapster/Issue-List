@@ -2,6 +2,7 @@ package com.turtlemint.assignment.utils
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.text.TextUtils
 import android.util.Log
@@ -13,7 +14,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object Utils {
-
+    const val INTENT_MAP_DATA_KEY = "mapData"
+    const val ISSUE_OBJECT = "issueObject"
     fun showSimpleDialog(context: Context?, title: String?, text: String?) {
         context?.let { safeContext ->
             AlertDialog.Builder(safeContext, R.style.AlertDialogTheme)
@@ -57,4 +59,18 @@ fun ImageView.showLoader(isLoading: Boolean) {
     } catch (e: Exception) {
         Log.e("Utils", "Exception: Animation: " + e.message)
     }
+}
+
+fun Context.launchActivity(
+    cls: Class<*>,
+    maps: HashMap<String, Any> = HashMap(),
+    flags: Int = 0,
+    intentTransformer: Intent.() -> Unit = {}
+) {
+    val intent = Intent(this, cls).apply {
+        addFlags(flags)
+        putExtra(Utils.INTENT_MAP_DATA_KEY, maps)
+        intentTransformer()
+    }
+    this.startActivity(intent)
 }

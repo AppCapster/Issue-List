@@ -1,5 +1,6 @@
 package com.turtlemint.assignment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,6 +9,7 @@ import com.turtlemint.assignment.datasource.local.database.entity.IssueEntity
 import com.turtlemint.assignment.ui.adapter.IssueRecyclerAdapter
 import com.turtlemint.assignment.ui.listener.IssueRecyclerListener
 import com.turtlemint.assignment.utils.Utils
+import com.turtlemint.assignment.utils.launchActivity
 import com.turtlemint.assignment.utils.showLoader
 import com.turtlemint.assignment.viewmodel.LocalViewModel
 import com.turtlemint.assignment.viewmodel.RemoteViewModel
@@ -55,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                     IssueRecyclerListener {
                     override fun clickIssue(issue: IssueEntity) {
                         if (userList.contains(issue)) {
-
+                            callDetailsActivity(issue)
                         }
                     }
                 })
@@ -70,5 +72,11 @@ class MainActivity : AppCompatActivity() {
         val title = getString(R.string.error_title)
         val text = getString(R.string.error_retrieving_data)
         Utils.showSimpleDialog(this, title, text)
+    }
+
+    fun callDetailsActivity(item: IssueEntity) {
+        val bundleData = HashMap<String, Any>()
+        bundleData[Utils.ISSUE_OBJECT] = item
+        launchActivity(DetailActivity::class.java, bundleData)
     }
 }

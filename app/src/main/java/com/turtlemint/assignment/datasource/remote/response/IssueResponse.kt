@@ -6,7 +6,8 @@ data class IssueResponse(
     var user: User,
     var labels: List<Labels>? = null,
     var updated_at: String? = null,
-    var body: String? = null
+    var body: String? = null,
+    var comments_url: String? = null
 )
 
 data class User(
