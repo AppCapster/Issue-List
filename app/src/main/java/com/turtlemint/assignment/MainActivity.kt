@@ -1,6 +1,5 @@
 package com.turtlemint.assignment
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -63,15 +62,11 @@ class MainActivity : AppCompatActivity() {
                 })
                 binding.rvIssues.adapter = issueRecyclerAdapter
             } else {
-                showError()
+                val title = getString(R.string.error_title)
+                val text = getString(R.string.error_retrieving_data)
+                Utils.showSimpleDialog(this, title, text)
             }
         }
-    }
-
-    private fun showError() {
-        val title = getString(R.string.error_title)
-        val text = getString(R.string.error_retrieving_data)
-        Utils.showSimpleDialog(this, title, text)
     }
 
     fun callDetailsActivity(item: IssueEntity) {

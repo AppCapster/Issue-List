@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.turtlemint.assignment.datasource.Resource
 import com.turtlemint.assignment.datasource.local.LocalDataSource
 import com.turtlemint.assignment.datasource.local.PersistanceError
+import com.turtlemint.assignment.datasource.local.database.entity.CommentEntity
 import com.turtlemint.assignment.datasource.local.database.entity.IssueEntity
 import kotlinx.coroutines.launch
 
@@ -53,6 +54,23 @@ class LocalViewModel(private val localDataSource: LocalDataSource) : ViewModel()
                 data.postValue(Resource.success(true))
             } catch (e: Exception) {
                 data.postValue(Resource.error(PersistanceError.UNKNOWN, e.message))
+            }
+        }
+        return data
+    }
+
+    fun getComments(): LiveData<Resource<List<CommentEntity>?, PersistanceError>> {
+        val data = MutableLiveData<Resource<List<CommentEntity>?, PersistanceError>>()
+        viewModelScope.launch {
+            try {
+                val issues = localDataSource.getComments()
+                data.postValue(Resource.success(issues))
+            } catch (e: Exception) {
+                data.postValue(
+                    Resource.error(
+                        PersistanceError.UNKNOWN, null
+                    )
+                )
             }
         }
         return data

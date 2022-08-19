@@ -8,17 +8,12 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity
-data class IssueEntity(
-    @ColumnInfo(name = "title") val title: String = "",
-    @ColumnInfo(name = "number") val number: String = "",
+data class CommentEntity(
+    @ColumnInfo(name = "comment_id") val comment_id: String = "",
     @ColumnInfo(name = "updated_at") val updated_at: String = "",
     @ColumnInfo(name = "body") val body: String = "",
     @ColumnInfo(name = "user") val user: String = "",
     @ColumnInfo(name = "avatar") val avatar: String = "",
-    @ColumnInfo(name = "label") var label: String = "",
-    @ColumnInfo(name = "label_color") var label_color: String = "",
-    @ColumnInfo(name = "comments_url") var comments_url: String = "",
-    @ColumnInfo(name = "state") var state: String = ""
 
 ) : Parcelable {
     @PrimaryKey(autoGenerate = true)

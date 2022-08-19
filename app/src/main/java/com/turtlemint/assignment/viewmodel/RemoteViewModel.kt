@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.turtlemint.assignment.datasource.Resource
 import com.turtlemint.assignment.datasource.local.LocalDataSource
+import com.turtlemint.assignment.datasource.local.database.entity.CommentEntity
 import com.turtlemint.assignment.datasource.local.database.entity.IssueEntity
 import com.turtlemint.assignment.datasource.remote.RemoteDataSource
 import com.turtlemint.assignment.datasource.remote.ResourceError
@@ -43,7 +44,8 @@ class RemoteViewModel(
                             item.user.login.toString(),
                             item.user.avatar_url.toString(),
                             labels, labelsColor,
-                            item.comments_url.toString()
+                            item.comments_url.toString(),
+                            item.state.toString()
                         )
                         localDataSource.insertIssue(issue)
                     }
@@ -60,26 +62,22 @@ class RemoteViewModel(
         }
     }
 
-    fun getComments(url : String) {
+    fun getComments(url: String) {
 
         viewModelScope.launch {
             try {
-                println("Comment url : $url")
                 val response = remoteDataSource.getComments(url)
                 if (response.isSuccessful && !response.body().isNullOrEmpty()) {
                     for (item in response.body()!!) {
 
-                        println("Comment : ${item.body}")
-                        /*val issue = IssueEntity(
-                            item.title.toString(),
-                            item.number.toString(),
+                        val comment = CommentEntity(
+                            item.id.toString(),
                             item.updated_at.toString(),
                             item.body.toString(),
                             item.user.login.toString(),
-                            item.user.avatar_url.toString(),
-                            labels, labelsColor
+                            item.user.avatar_url.toString()
                         )
-                        localDataSource.insertIssue(issue)*/
+                        localDataSource.insertComment(comment)
                     }
                     progressLiveData.postValue(true)
                 } else {

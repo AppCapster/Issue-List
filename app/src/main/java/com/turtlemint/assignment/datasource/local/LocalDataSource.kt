@@ -1,6 +1,7 @@
 package com.turtlemint.assignment.datasource.local
 
 import com.turtlemint.assignment.datasource.local.database.AppDatabase
+import com.turtlemint.assignment.datasource.local.database.entity.CommentEntity
 import com.turtlemint.assignment.datasource.local.database.entity.IssueEntity
 
 class LocalDataSource(private val db: AppDatabase) {
@@ -25,6 +26,26 @@ class LocalDataSource(private val db: AppDatabase) {
         db.issueDao().deleteAll()
     }
 
+    //for Comments
+    suspend fun getComments(): List<CommentEntity> {
+        return db.commentDao().getAll()
+    }
+
+    suspend fun insertComment(issue: CommentEntity) {
+        db.commentDao().insert(issue)
+    }
+
+    suspend fun updateComment(issue: CommentEntity) {
+        db.commentDao().update(issue)
+    }
+
+    suspend fun deleteComment(issue: CommentEntity) {
+        db.commentDao().delete(issue)
+    }
+
+    suspend fun deleteAllComments() {
+        db.commentDao().deleteAll()
+    }
 }
 
 enum class PersistanceError { UNKNOWN, UNAUTHORIZED }

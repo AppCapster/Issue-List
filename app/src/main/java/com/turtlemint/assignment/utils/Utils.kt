@@ -16,6 +16,7 @@ import java.util.*
 object Utils {
     const val INTENT_MAP_DATA_KEY = "mapData"
     const val ISSUE_OBJECT = "issueObject"
+
     fun showSimpleDialog(context: Context?, title: String?, text: String?) {
         context?.let { safeContext ->
             AlertDialog.Builder(safeContext, R.style.AlertDialogTheme)
