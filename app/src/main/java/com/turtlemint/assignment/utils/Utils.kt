@@ -2,7 +2,11 @@ package com.turtlemint.assignment.utils
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.drawable.AnimationDrawable
 import android.text.TextUtils
+import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import com.turtlemint.assignment.R
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -37,5 +41,20 @@ object Utils {
             e.printStackTrace()
         }
         return dateStr
+    }
+}
+fun ImageView.showLoader(isLoading: Boolean) {
+    try {
+        if (isLoading) {
+            val myAnimationDrawable = this.drawable as AnimationDrawable
+            myAnimationDrawable.start()
+            this.visibility = View.VISIBLE
+        } else {
+            val myAnimationDrawable = this.drawable as AnimationDrawable
+            myAnimationDrawable.stop()
+            this.visibility = View.GONE
+        }
+    } catch (e: Exception) {
+        Log.e("Utils", "Exception: Animation: " + e.message)
     }
 }

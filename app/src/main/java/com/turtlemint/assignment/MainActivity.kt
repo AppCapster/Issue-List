@@ -8,6 +8,7 @@ import com.turtlemint.assignment.datasource.local.database.entity.IssueEntity
 import com.turtlemint.assignment.ui.adapter.IssueRecyclerAdapter
 import com.turtlemint.assignment.ui.listener.IssueRecyclerListener
 import com.turtlemint.assignment.utils.Utils
+import com.turtlemint.assignment.utils.showLoader
 import com.turtlemint.assignment.viewmodel.LocalViewModel
 import com.turtlemint.assignment.viewmodel.RemoteViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,18 +34,15 @@ class MainActivity : AppCompatActivity() {
     private fun init() {
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvIssues.layoutManager = layoutManager
-
+        binding.imageViewProgress.showLoader(true)
         remoteViewModel.getAllIssues()
 
     }
 
     private fun observer() {
         remoteViewModel.progressLiveData.observe(this) {
-            if (it) {
-                getLocalData()
-            } else {
-                showError()
-            }
+            binding.imageViewProgress.showLoader(false)
+            getLocalData()
         }
     }
 
