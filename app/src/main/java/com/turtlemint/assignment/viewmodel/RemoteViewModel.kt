@@ -20,8 +20,6 @@ class RemoteViewModel(
 ) : ViewModel() {
 
     val progressLiveData: MutableLiveData<Boolean> = MutableLiveData()
-    val uriLiveData: MutableLiveData<Resource<ResourceDownloadedModel, ResourceError>> =
-        MutableLiveData()
 
     fun getAllIssues() {
 
@@ -90,5 +88,9 @@ class RemoteViewModel(
                 }
             }
         }
+    }
+
+    fun downloadImage() {
+
     }
 }

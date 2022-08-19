@@ -12,40 +12,56 @@
         android:id="@+id/layoutRow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
         android:paddingStart="10dp"
         android:paddingTop="10dp"
         android:paddingEnd="10dp"
-        android:background="?android:selectableItemBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:maxLines="2"
-            android:textStyle="bold"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgIssueStatus"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtIssueStatus"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="title" />
+            app:layout_constraintTop_toTopOf="@id/txtIssueStatus" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtIssueStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@+id/imgIssueStatus"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="open" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtUpdateTime"
+            tools:text="title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtIssueType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:backgroundTint="@color/red"
             android:background="@drawable/rect_round_corner"
+            android:backgroundTint="@color/red"
             android:ellipsize="end"
             android:gravity="center"
             android:padding="2dp"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtTitle"
+            app:layout_constraintStart_toStartOf="@+id/txtTitle"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle"
             tools:text="status" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -57,7 +73,7 @@
             android:maxLength="200"
             android:maxLines="3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtIssueStatus" />
+            app:layout_constraintTop_toBottomOf="@id/txtIssueType" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtUpdateTime"
@@ -85,9 +101,12 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgUser"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginStart="10dp"
+            android:background="@color/white"
+            android:padding="2dp"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="@+id/txtUser"
             app:layout_constraintStart_toEndOf="@id/txtUser"
             app:layout_constraintTop_toTopOf="@+id/txtUser" />

@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.turtlemint.assignment.databinding.ItemCommentBinding
 import com.turtlemint.assignment.datasource.local.database.entity.CommentEntity
 import com.turtlemint.assignment.utils.Utils
+import com.turtlemint.assignment.utils.Utils.stringDateToLong
+import com.turtlemint.assignment.utils.Utils.toTimeAgo
 
 class CommentsRecyclerAdapter(var issues: List<CommentEntity>) :
     RecyclerView.Adapter<CommentsRecyclerAdapter.CommentViewHolder>() {
@@ -29,11 +31,15 @@ class CommentsRecyclerAdapter(var issues: List<CommentEntity>) :
         )
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(commentEntity: CommentEntity) {
-            binding.txtDescription.text = commentEntity.body
+            try {
+                binding.txtDescription.text = commentEntity.body
 
-            binding.txtUpdateTime.text =
-                "Commented ${Utils.getFormattedDate(commentEntity.updated_at)}"
-            binding.txtUser.text = commentEntity.user
+                binding.txtUpdateTime.text =
+                    "Commented ${stringDateToLong(commentEntity.updated_at).toTimeAgo()}"
+                binding.txtUser.text = commentEntity.user
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }
