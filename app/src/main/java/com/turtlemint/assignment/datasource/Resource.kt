@@ -1,0 +1,29 @@
+package com.turtlemint.assignment.datasource
+
+data class Resource<ObjType, ErrorType>(
+    val data: ObjType?,
+    val error: ErrorType?,
+    val errorExtra: String?
+) {
+    companion object {
+        fun <ObjType, ErrorType> success(objType: ObjType): Resource<ObjType, ErrorType> {
+            return Resource(
+                objType,
+                null,
+                null
+            )
+        }
+
+        fun <ObjType, ErrorType> error(
+            errorType: ErrorType,
+            errorExtra: String?,
+            data: ObjType? = null
+        ): Resource<ObjType, ErrorType> {
+            return Resource(
+                data,
+                errorType,
+                errorExtra
+            )
+        }
+    }
+}

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Assignment</string>
+
+    <string name="error_title">Error</string>
+    <string name="error_retrieving_data">An error occurred while retrieving data.</string>
+    <string name="error_creating_data">An error occurred while creating data.</string>
+    <string name="error_downloading_resource">An error occurred while downloading the image.</string>
+    <string name="error_share_image_activity_resolve">No App found to handle image share.</string>
+    <string name="ok">OK</string>
 </resources>
